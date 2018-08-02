@@ -126,7 +126,7 @@ def add_repository():
 	else:
 		try:
 			f = open("/etc/apt/sources.list.d/katoolin.list", "wb")
-			f.write("#Katoolin\ndeb http://http.kali.org/kali kali-rolling main contrib non-free\n# For source package access, uncomment the following line\n# deb-src http://http.kali.org/kali kali-rolling main contrib non-free\n")
+			f.write("#Katoolin\ndeb tor+http://http.kali.org/kali kali-rolling main contrib non-free\n# For source package access, uncomment the following line\n# deb-src tor+http://http.kali.org/kali kali-rolling main contrib non-free\n")
 			f.close()
 			print green + "\n[+] Add repository\n" + reset
 			add_key()
@@ -151,7 +151,7 @@ def add_key():
 	if os.path.exists(tmp_key):
 		pass
 	else:
-		os.system("apt-key adv --keyserver pgp.mit.edu --recv-keys ED444FF07D8D0BF6")
+		os.system("apt-key adv --keyserver pgp.mit.edu --keyserver-options http-proxy=http://localhost:9050 --recv-keys ED444FF07D8D0BF6")
 		f = open(tmp_key, "wb")
 		f.write("katoolin\n")
 		f.close()
